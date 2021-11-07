@@ -1,0 +1,17 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "build",
+			"path": "browser-esm-webpack-typescript/",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": [],
+			"label": "npm: build - browser-esm-webpack-typescript",
+			"detail": "node node_modules/webpack/bin/webpack.js --progress"
+		}
+	]
+}

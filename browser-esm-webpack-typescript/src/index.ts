@@ -103,7 +103,28 @@ monaco.languages.registerDocumentSemanticTokensProvider('plaintext', {
 });
 
 const mEditor = monaco.editor.create(document.body, {
-	value: ['function x() {', '\tconsole.log("Hello world!");', '}'].join('\n'),
-	language: 'typescript',
-	theme: 'dark'
+    value: [
+        'Available token types:',
+        '    [comment] [string] [keyword] [number] [regexp] [operator] [namespace]',
+        '    [type] [struct] [class] [interface] [enum] [typeParameter] [function]',
+        '    [member] [macro] [variable] [parameter] [property] [label]',
+        '',
+        'Available token modifiers:',
+        '    [type.declaration] [type.documentation] [type.member] [type.static]',
+        '    [type.abstract] [type.deprecated] [type.modification] [type.async]',
+        '',
+        'Some examples:',
+        '    [class.static.token]     [type.static.abstract]',
+        '    [class.static.token]     [type.static]',
+        '',
+        '    [struct]',
+        '',
+        '    [function.private]',
+        '',
+        'An error case:',
+        '    [notInLegend]'
+    ].join('\n'),
+	language: 'plaintext',
+	theme: 'dark',
+	'semanticHighlighting.enabled': true
 });

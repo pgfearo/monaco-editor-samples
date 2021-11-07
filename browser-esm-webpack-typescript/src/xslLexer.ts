@@ -116,6 +116,12 @@ interface XmlElement {
     expandText: boolean;
 }
 
+export interface Snippet {
+	name: string
+	body: string
+	description: string
+}
+
 export interface LanguageConfiguration {
     expressionAtts: string[],
     variableElementNames: string[],
@@ -129,6 +135,8 @@ export interface LanguageConfiguration {
     resourceNames?: string[],
     featureNames?: string[],
     propertyNames?: string[],
+    rootElementSnippets?: Snippet[];
+    elementSnippets?: Snippet[];
 }
 
 export interface GlobalInstructionData {

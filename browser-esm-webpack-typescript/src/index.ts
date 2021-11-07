@@ -1,5 +1,7 @@
 import * as monaco from 'monaco-editor';
 import './index.css';
+import { XSLTConfiguration } from './languageConfigurations';
+import { LanguageConfiguration, XslLexer } from './xslLexer';
 
 // @ts-ignore
 self.MonacoEnvironment = {
@@ -55,6 +57,8 @@ function getType(type: string) {
 }
 
 const tokenPattern = new RegExp('([a-zA-Z]+)((?:\\.[a-zA-Z]+)*)', 'g');
+const xslLexer: XslLexer = new XslLexer(XSLTConfiguration.configuration);
+xslLexer.provideCharLevelState = true;
 
 monaco.editor.defineTheme('xslDarkTheme', themeData);
 
@@ -64,7 +68,9 @@ monaco.languages.registerDocumentSemanticTokensProvider('plaintext', {
 	},
 	provideDocumentSemanticTokens: function (model, lastResultId, token) {
 			const lines = model.getLinesContent();
-
+			const text = lines.join('\n');
+			const allTokens = xslLexer.analyse(text);
+			console.log({allTokens});
 			/** @type {number[]} */
 			const data = [];
 
@@ -105,27 +111,15 @@ monaco.languages.registerDocumentSemanticTokensProvider('plaintext', {
 });
 
 const mEditor = monaco.editor.create(document.body, {
-    value: [
-        'Available token types:',
-        '    [xmlPunctuation], [comment] [string] [keyword] [number] [regexp] [operator] [namespace]',
-        '    [type] [struct] [class] [interface] [enum] [typeParameter] [function]',
-        '    [member] [macro] [variable] [parameter] [property] [label]',
-        '',
-        'Available token modifiers:',
-        '    [type.declaration] [type.documentation] [type.member] [type.static]',
-        '    [type.abstract] [type.deprecated] [type.modification] [type.async]',
-        '',
-        'Some examples:',
-        '    [class.static.token]     [type.static.abstract]',
-        '    [class.static.token]     [type.static]',
-        '',
-        '    [struct]',
-        '',
-        '    [function.private]',
-        '',
-        'An error case:',
-        '    [notInLegend]'
-    ].join('\n'),
+    value:
+        `<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+		xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		exclude-result-prefixes="#all"
+		expand-text="yes"
+		version="3.0">
+
+<xsl:variable select="@*, /abc/def/node()"/>
+</xsl:stylesheet>`,
 	language: 'plaintext',
 	theme: 'xslDarkTheme',
 	'semanticHighlighting.enabled': true

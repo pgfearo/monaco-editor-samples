@@ -20,17 +20,19 @@ self.MonacoEnvironment = {
 	}
 };
 
+// unsure how to use these yet - related to 'encodedTokensColors' property
+// of IStandaloneThemeData interfac that takes a string[] type?
+const themeColors: monaco.editor.IColors = {'mygreen': '#0000ff'};
+
 const themeRules: monaco.editor.ITokenThemeRule[] = [
 	{
 		token: 'xmlPunctuation',
-		foreground: '#ff0000'
+		foreground: '#0000ff'
 	}
 ]
 
-const themeColors: monaco.editor.IColors = {'myred': '#ff0000'};
-
 const themeData: monaco.editor.IStandaloneThemeData = {
-    base: 'vs',
+    base: 'vs-dark',
     inherit: true,
 	rules: themeRules,
 	colors: themeColors
@@ -54,7 +56,7 @@ function getType(type: string) {
 
 const tokenPattern = new RegExp('([a-zA-Z]+)((?:\\.[a-zA-Z]+)*)', 'g');
 
-monaco.editor.defineTheme('myTheme', themeData);
+monaco.editor.defineTheme('xslDarkTheme', themeData);
 
 monaco.languages.registerDocumentSemanticTokensProvider('plaintext', {
 	getLegend: function () {
@@ -125,6 +127,6 @@ const mEditor = monaco.editor.create(document.body, {
         '    [notInLegend]'
     ].join('\n'),
 	language: 'plaintext',
-	theme: 'vs-dark',
+	theme: 'xslDarkTheme',
 	'semanticHighlighting.enabled': true
 });

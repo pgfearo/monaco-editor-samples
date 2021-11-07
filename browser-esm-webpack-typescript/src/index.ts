@@ -38,7 +38,7 @@ const themeData: monaco.editor.IStandaloneThemeData = {
 
 const legend = {
     tokenTypes: [
-        'comment', 'string', 'keyword', 'number', 'regexp', 'operator', 'namespace',
+        'xmlPunctuation', 'comment', 'string', 'keyword', 'number', 'regexp', 'operator', 'namespace',
         'type', 'struct', 'class', 'interface', 'enum', 'typeParameter', 'function',
         'member', 'macro', 'variable', 'parameter', 'property', 'label'
     ],
@@ -105,7 +105,7 @@ monaco.languages.registerDocumentSemanticTokensProvider('plaintext', {
 const mEditor = monaco.editor.create(document.body, {
     value: [
         'Available token types:',
-        '    [comment] [string] [keyword] [number] [regexp] [operator] [namespace]',
+        '    [xmlPunctuation], [comment] [string] [keyword] [number] [regexp] [operator] [namespace]',
         '    [type] [struct] [class] [interface] [enum] [typeParameter] [function]',
         '    [member] [macro] [variable] [parameter] [property] [label]',
         '',
@@ -125,6 +125,6 @@ const mEditor = monaco.editor.create(document.body, {
         '    [notInLegend]'
     ].join('\n'),
 	language: 'plaintext',
-	theme: 'dark',
+	theme: 'vs-dark',
 	'semanticHighlighting.enabled': true
 });

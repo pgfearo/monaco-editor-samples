@@ -4,39 +4,39 @@ export namespace xslThemeData {
 	export const vsDark: monaco.editor.ITokenThemeRule[] = [
 		{
 			token: 'attributeName',
-			foreground: '#ff0000'
+			foreground: '#9CDCFE'
 		},
 		{
 			token: 'attributeEquals',
-			foreground: '#ff0000'
+			foreground: '#808080'
 		},
 		{
 			token: 'attributeValue',
-			foreground: '#ff0000'
+			foreground: '#ce9178'
 		},
 		{
 			token: 'xmlnsName',
-			foreground: '#ff0000'
+			foreground: '#6A9955'
 		},
 		{
 			token: 'dtd',
-			foreground: '#ff0000'
+			foreground: '#808080'
 		},
 		{
 			token: 'dtdEnd',
-			foreground: '#ff0000'
+			foreground: '#808080'
 		},
 		{
 			token: 'elementName',
-			foreground: '#ff0000'
+			foreground: '#4EC9B0'
 		},
 		{
 			token: 'elementValue',
-			foreground: '#ff0000'
+			foreground: '#b5cea8'
 		},
 		{
 			token: 'processingInstrName',
-			foreground: '#ff0000'
+			foreground: '#569cd6'
 		},
 		{
 			token: 'processingInstrValue',
@@ -44,23 +44,23 @@ export namespace xslThemeData {
 		},
 		{
 			token: 'entityRef',
-			foreground: '#ff0000'
+			foreground: '#DCDCAA'
 		},
 		{
 			token: 'xmlComment',
-			foreground: '#ff0000'
+			foreground: '#6A9955'
 		},
 		{
 			token: 'xmlPunctuation',
-			foreground: '#0000ff'
+			foreground: '#808080'
 		},
 		{
 			token: 'xslElementName',
-			foreground: '#00ff00'
+			foreground: '#569cd6'
 		},
 		{
 			token: 'xmlText',
-			foreground: '#ff0000'
+			foreground: '#b5cea8'
 		},
 		// XPath tokens:
 		{

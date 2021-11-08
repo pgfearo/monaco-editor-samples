@@ -1,6 +1,7 @@
 import * as monaco from 'monaco-editor';
 import './index.css';
 import { XSLTConfiguration } from './languageConfigurations';
+import { BaseToken } from './xpLexer';
 import { LanguageConfiguration, XslLexer } from './xslLexer';
 
 // @ts-ignore
@@ -56,15 +57,24 @@ function getType(type: string) {
     return legend.tokenTypes.indexOf(type);
 }
 
+function getAdaptedXslType(tokenType: number) {
+	return tokenType;;
+}
+
 const tokenPattern = new RegExp('([a-zA-Z]+)((?:\\.[a-zA-Z]+)*)', 'g');
 const xslLexer: XslLexer = new XslLexer(XSLTConfiguration.configuration);
+const xslLegend = XslLexer.getTextmateTypeLegend();
+
 xslLexer.provideCharLevelState = true;
 
 monaco.editor.defineTheme('xslDarkTheme', themeData);
 
 monaco.languages.registerDocumentSemanticTokensProvider('plaintext', {
 	getLegend: function () {
-			return legend;
+			return {
+				tokenTypes: xslLegend,
+				tokenModifiers: []
+			}
 	},
 	provideDocumentSemanticTokens: function (model, lastResultId, token) {
 			const lines = model.getLinesContent();
@@ -77,31 +87,26 @@ monaco.languages.registerDocumentSemanticTokensProvider('plaintext', {
 			let prevLine = 0;
 			let prevChar = 0;
 
-			for (let i = 0; i < lines.length; i++) {
-					const line = lines[i];
+			for (let i = 0; i < allTokens.length; i++) {
+				const token: BaseToken = allTokens[i];
+				let type = getAdaptedXslType(token.tokenType);
+				let modifier = 0;
+				let line = token.line;
+				let char = token.startCharacter;
+				data.push(
+					// translate line to deltaLine
+					line - prevLine,
+					// for the same line, translate start to deltaStart
+					prevLine === line ? char - prevChar : char,
+					token.length,
+					type,
+					modifier
+			);
 
-					for (let match = null; match = tokenPattern.exec(line);) {
-							// translate token and modifiers to number representations
-							let type = getType(match[1]);
-							if (type === -1) {
-									continue;
-							}
-							let modifier = 0
-
-							data.push(
-									// translate line to deltaLine
-									i - prevLine,
-									// for the same line, translate start to deltaStart
-									prevLine === i ? match.index - prevChar : match.index,
-									match[0].length,
-									type,
-									modifier
-							);
-
-							prevLine = i;
-							prevChar = match.index;
-					}
+			prevLine = line;
+			prevChar = token.startCharacter;
 			}
+
 			return {
 					data: new Uint32Array(data),
 					resultId: null

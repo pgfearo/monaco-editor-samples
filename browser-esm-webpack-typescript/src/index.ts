@@ -3,6 +3,8 @@ import './index.css';
 import { XSLTConfiguration } from './languageConfigurations';
 import { BaseToken } from './xpLexer';
 import { LanguageConfiguration, XslLexer } from './xslLexer';
+import './xslThemeData';
+import { xslThemeData } from './xslThemeData';
 
 // @ts-ignore
 self.MonacoEnvironment = {
@@ -27,34 +29,11 @@ self.MonacoEnvironment = {
 // of IStandaloneThemeData interfac that takes a string[] type?
 const themeColors: monaco.editor.IColors = {'mygreen': '#0000ff'};
 
-const themeRules: monaco.editor.ITokenThemeRule[] = [
-	{
-		token: 'xmlPunctuation',
-		foreground: '#0000ff'
-	}
-]
-
 const themeData: monaco.editor.IStandaloneThemeData = {
     base: 'vs-dark',
     inherit: true,
-	rules: themeRules,
+	rules: xslThemeData.vsDark,
 	colors: themeColors
-}
-
-const legend = {
-    tokenTypes: [
-        'xmlPunctuation', 'comment', 'string', 'keyword', 'number', 'regexp', 'operator', 'namespace',
-        'type', 'struct', 'class', 'interface', 'enum', 'typeParameter', 'function',
-        'member', 'macro', 'variable', 'parameter', 'property', 'label'
-    ],
-    tokenModifiers: [
-        'declaration', 'documentation', 'readonly', 'static', 'abstract', 'deprecated',
-        'modification', 'async'
-    ]
-};
-
-function getType(type: string) {
-    return legend.tokenTypes.indexOf(type);
 }
 
 function getAdaptedXslType(tokenType: number) {

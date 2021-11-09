@@ -65,79 +65,71 @@ export namespace xslThemeData {
 		// XPath tokens:
 		{
 			token: 'attributeNameTest',
-			foreground: '#ffffff'
+			foreground: '#9CDCFE'
 		},
 		{
 			token: 'comment',
-			foreground: '#ffffff'
+			foreground: '#6A9955'
 		},
 		{
 			token: 'number',
-			foreground: '#ffffff'
+			foreground: '#b5cea8'
 		},
 		{
 			token: 'Unset',
-			foreground: '#ffffff'
+			foreground: '#808080'
 		},
 		{
 			token: 'operator',
-			foreground: '#ffffff'
+			foreground: '#d4d4d4'
 		},
 		{
 			token: 'variable',
-			foreground: '#ffffff'
-		},
-		{
-			token: 'Whitespace',
-			foreground: '#ffffff'
+			foreground: '#9CDCFE'
 		},
 		{
 			token: 'string',
-			foreground: '#ffffff'
+			foreground: '#ce9178'
 		},
 		{
 			token: 'uriLiteral',
-			foreground: '#ffffff'
+			foreground: '#569cd6'
 		},
 		{
 			token: 'nodeType',
-			foreground: '#ffffff'
+			foreground: '#9CDCFE'
 		},
 		{
 			token: 'simpleType',
-			foreground: '#ffffff'
+			foreground: '#9CDCFE'
 		},
 		{
 			token: 'axisName',
-			foreground: '#ffffff'
+			foreground: '#d4d4d4'
 		},
 		{
 			token: 'nodeNameTest',
-			foreground: '#ffffff'
+			foreground: '#4EC9B0'
 		},
 		{
 			token: 'functionNameTest',
-			foreground: '#ffffff'
+			foreground: '#4EC9B0'
 		},
 		{
 			token: 'complexExpression',
-			foreground: '#ffffff'
+			foreground: '#C586C0'
 		},
 		{
 			token: 'function',
-			foreground: '#ff0000'
-		},
-		{
-			token: 'entityRef',
-			foreground: '#ffffff'
+			foreground: '#DCDCAA'
 		},
 		{
 			token: 'anonymousFunction',
-			foreground: '#ffffff'
+			foreground: '#4FC1FF'
 		},
 		{
 			token: 'mapKey',
-			foreground: '#ffffff'
+			foreground: '#C586C0'
 		}
 	]
 }

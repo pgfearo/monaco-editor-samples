@@ -1,6 +1,7 @@
 import * as monaco from 'monaco-editor';
 
 export namespace xslThemeData {
+
 	export const vsDark: monaco.editor.ITokenThemeRule[] = [
 		{
 			token: 'attributeName',

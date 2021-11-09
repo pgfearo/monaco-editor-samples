@@ -1,8 +1,6 @@
 import * as monaco from 'monaco-editor';
 import './index.css';
-import { XSLTConfiguration } from './languageConfigurations';
-import { BaseToken } from './xpLexer';
-import { LanguageConfiguration, XslLexer } from './xslLexer';
+import { MonacoXSLT } from './monacoXSLT';
 import './xslThemeData';
 import { xslThemeData } from './xslThemeData';
 
@@ -36,60 +34,15 @@ const themeData: monaco.editor.IStandaloneThemeData = {
 	colors: themeColors
 }
 
-function getAdaptedXslType(tokenType: number) {
-	return tokenType;;
-}
-
-const tokenPattern = new RegExp('([a-zA-Z]+)((?:\\.[a-zA-Z]+)*)', 'g');
-const xslLexer: XslLexer = new XslLexer(XSLTConfiguration.configuration);
-const xslLegend = XslLexer.getTextmateTypeLegend();
-
-xslLexer.provideCharLevelState = true;
-
 monaco.editor.defineTheme('xslDarkTheme', themeData);
+const mXSLT = new MonacoXSLT();
 
 monaco.languages.registerDocumentSemanticTokensProvider('plaintext', {
 	getLegend: function () {
-			return {
-				tokenTypes: xslLegend,
-				tokenModifiers: []
-			}
+			return MonacoXSLT.getLegend();
 	},
 	provideDocumentSemanticTokens: function (model, lastResultId, token) {
-			const lines = model.getLinesContent();
-			const text = lines.join('\n');
-			const allTokens = xslLexer.analyse(text);
-			console.log({allTokens});
-			/** @type {number[]} */
-			const data = [];
-
-			let prevLine = 0;
-			let prevChar = 0;
-
-			for (let i = 0; i < allTokens.length; i++) {
-				const token: BaseToken = allTokens[i];
-				let type = getAdaptedXslType(token.tokenType);
-				let modifier = 0;
-				let line = token.line;
-				let char = token.startCharacter;
-				data.push(
-					// translate line to deltaLine
-					line - prevLine,
-					// for the same line, translate start to deltaStart
-					prevLine === line ? char - prevChar : char,
-					token.length,
-					type,
-					modifier
-			);
-
-			prevLine = line;
-			prevChar = token.startCharacter;
-			}
-
-			return {
-					data: new Uint32Array(data),
-					resultId: null
-			};
+			return mXSLT.provideDocumentSemanticTokens(model, lastResultId, token);
 	},
 	releaseDocumentSemanticTokens: function (resultId) { }
 });

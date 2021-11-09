@@ -41,7 +41,7 @@ export namespace xslThemeData {
 		},
 		{
 			token: 'processingInstrValue',
-			foreground: '#ff0000'
+			foreground: '#9CDCFE'
 		},
 		{
 			token: 'entityRef',

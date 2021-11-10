@@ -36,8 +36,12 @@ const themeData: monaco.editor.IStandaloneThemeData = {
 
 monaco.editor.defineTheme('xslDarkTheme', themeData);
 const mXSLT = new MonacoXSLT();
+const _XSLT = 'xslt';
 
-monaco.languages.registerDocumentSemanticTokensProvider('plaintext', {
+monaco.languages.register({
+	id: _XSLT
+});
+monaco.languages.registerDocumentSemanticTokensProvider(_XSLT, {
 	getLegend: function () {
 			return MonacoXSLT.getLegend();
 	},
@@ -57,7 +61,7 @@ const mEditor = monaco.editor.create(document.body, {
 
 <xsl:variable select="@*, /abc/def/node()"/>
 </xsl:stylesheet>`,
-	language: 'plaintext',
+	language: _XSLT,
 	theme: 'xslDarkTheme',
 	'semanticHighlighting.enabled': true
 });

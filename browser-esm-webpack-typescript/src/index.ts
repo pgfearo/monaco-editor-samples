@@ -50,6 +50,22 @@ monaco.languages.registerDocumentSemanticTokensProvider(_XSLT, {
 	},
 	releaseDocumentSemanticTokens: function (resultId) { }
 });
+monaco.languages.registerDocumentFormattingEditProvider(_XSLT, {
+	provideDocumentFormattingEdits: function (model, options, token) {
+		return [];
+	}
+});
+monaco.languages.registerDocumentRangeFormattingEditProvider(_XSLT, {
+	provideDocumentRangeFormattingEdits: function (model, range, options, token) {
+		return [];
+	}
+});
+monaco.languages.registerOnTypeFormattingEditProvider(_XSLT, {
+	autoFormatTriggerCharacters: [],
+	provideOnTypeFormattingEdits: function (model, position, ch, options, token) {
+		return [];
+	}
+});
 
 const mEditor = monaco.editor.create(document.body, {
     value:
